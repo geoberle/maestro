@@ -186,6 +186,11 @@ parameters:
   description: Timeout for all Sentry operations
   value: "5s"
 
+- name: PULL_SECRET_NAME
+  displayName: Pull Secret Name
+  description: Name of the pull secret to use for pulling images
+  value: "quay.io"
+
 objects:
   - kind: ServiceAccount
     apiVersion: v1
@@ -193,6 +198,8 @@ objects:
       name: maestro
       labels:
         app: maestro
+    imagePullSecrets:
+    - name: ${PULL_SECRET_NAME}
 
   - kind: Deployment
     apiVersion: apps/v1
